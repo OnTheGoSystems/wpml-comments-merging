@@ -28,6 +28,8 @@ function merge_comments($comments, $post_ID) {
 		// in $comments are already the comments from the current language
 		if(!$l['active']) {
 			$otherID = apply_filters( 'wpml_object_id', $post_ID, $type, false, $l['language_code'] );
+			if ($otherID === null)
+                		continue;
 			$othercomments = get_comments( array('post_id' => $otherID, 'status' => 'approve', 'order' => 'ASC') );
 			$comments = array_merge($comments, $othercomments);
 		}
